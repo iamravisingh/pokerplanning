@@ -9,13 +9,17 @@ export default defineConfig({
   server: {
     port: 4200,
     host: 'localhost',
+    fs: {
+      // Allow serving files from one level up to the project root
+      allow: ['..'],
+    },
   },
 
   preview: {
     port: 4300,
     host: 'localhost',
   },
-
+ 
   plugins: [
     react(),
     viteTsConfigPaths({

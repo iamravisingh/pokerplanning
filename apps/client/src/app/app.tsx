@@ -1,12 +1,11 @@
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import styles from './app.module.scss';
-
-import NxWelcome from './nx-welcome';
+// import { SocketConnection } from '../components/SocketConnection'
+import { Home } from "../components/Home";
 
 export function App() {
   return (
     <div>
-      <NxWelcome title="client" />
+      <Home/>
+      {/* <SocketConnection/> */}
     </div>
   );
 }
