@@ -1,0 +1,11 @@
+.createRoomContainer{
+    margin-top: 15px;
+    h3: {
+        color: grey;
+    }
+    .createRoomModal{
+        display: flex;
+        gap: 10px;
+        flex-direction: column;
+    }
+}

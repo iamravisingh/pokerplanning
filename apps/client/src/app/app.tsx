@@ -1,13 +1,8 @@
-// import { SocketConnection } from '../components/SocketConnection'
-import { Home } from "../components/Home";
+import AppRouter from '../components/Router';
+import "./app.scss";
 
 export function App() {
-  return (
-    <div>
-      <Home/>
-      {/* <SocketConnection/> */}
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;
