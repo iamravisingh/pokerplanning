@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from "react";
+import { useState, ChangeEvent } from 'react';
 import Button from '@mui/material/Button';
 import Container from '@mui/material/Container';
 import Box from '@mui/material/Box';
@@ -7,37 +7,50 @@ import Paper from '@mui/material/Paper';
 import './style.scss';
 
 export const CreateRoom = (): JSX.Element => {
-  const [ roomName, setRoomName ] = useState("")
+  const [roomName, setRoomName] = useState('');
 
   const handleNameChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const { target: { value } } = event;
-    if(value){
-      setRoomName(value)
+    const {
+      target: { value },
+    } = event;
+    if (value) {
+      setRoomName(value);
     }
-  }
+  };
   return (
-    <Container className="createRoomContainer">
-      <Box>
-        <h3>Create a Room to Start Voting</h3>
-      </Box>
-      <Paper elevation={3}>
-        <Box p={5} className="createRoomModal">
+    <Box className="createRoomContainer">
+      <h3>Create a Room to Start Voting</h3>
+      <Paper elevation={3} className="createRoomFormContainer">
+        <Box className="roomFormFields">
+          <label>Room Name</label>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Room Name"
+            // label="Room Name"
             fullWidth
-            variant="standard"
+            variant="outlined"
             placeholder="Give your room a name"
             value={roomName}
             onChange={handleNameChange}
+            required
           />
-          <Box>
-            <Button variant="contained">Create Room</Button>
-          </Box>
+          <label>Your Name</label>
+          <TextField
+            // autoFocus
+            margin="dense"
+            id="name"
+            // label="Your Name"
+            fullWidth
+            variant="outlined"
+            placeholder="Type your name"
+            value={roomName}
+            onChange={handleNameChange}
+            required
+          />
+          <Button variant="contained">Create Room</Button>
         </Box>
       </Paper>
-    </Container>
+    </Box>
   );
 };

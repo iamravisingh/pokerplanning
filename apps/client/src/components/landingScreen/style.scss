@@ -1,0 +1,39 @@
+.landingScreenContainer {
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+  .landingContent {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+
+    h1 {
+      color: #fff;
+      font-family: Inter;
+      font-size: 70px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: normal;
+    }
+    span {
+      color: #fff;
+      font-family: Inter;
+      font-size: 39px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+      letter-spacing: -1.2px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 20px;
+      width: 35%;
+      border-radius: 20px;
+      background: #282a3a;
+      text-transform: none;
+      font-size: 18px;
+      color: #C69749;
+    }
+  }
+}
