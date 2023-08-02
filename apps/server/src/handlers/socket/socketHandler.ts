@@ -21,7 +21,16 @@ const socketSetup = (server: HttpServer): void => {
     socket.on("disconnect", () => {
       console.log("A user disconnected");
     });
+
+    //emits createRoom 
+    socket.on('createRoom', (roomName) => {
+      // Handle the room creation logic here
+      // You can emit messages back to the client or broadcast messages to all clients
+      // For simplicity, let's just log the room name for now
+      console.log(`Room created >>>>>${roomName}`);
+    });
   });
+
 };
 
 export default socketSetup;

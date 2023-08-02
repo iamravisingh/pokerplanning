@@ -34,6 +34,7 @@ export const CreateRoom = (): JSX.Element => {
             value={roomName}
             onChange={handleNameChange}
             required
+            autoComplete="false"
           />
           <label>Your Name</label>
           <TextField
@@ -47,6 +48,7 @@ export const CreateRoom = (): JSX.Element => {
             value={roomName}
             onChange={handleNameChange}
             required
+            autoComplete='false'
           />
           <Button variant="contained">Create Room</Button>
         </Box>
