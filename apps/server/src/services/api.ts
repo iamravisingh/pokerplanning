@@ -20,8 +20,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //app endpoints 
-app.use('/api/rooms', roomRoutes);
+app.use('/api', roomRoutes);
 
-socketHandler(server);
+const io = socketHandler(server);
 
-export { app, server };
+export { app, server, io };

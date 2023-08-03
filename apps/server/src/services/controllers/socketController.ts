@@ -2,7 +2,7 @@ import { Server, Socket } from "socket.io";
 import { Server as HttpServer } from "http";
 
 // Export a function that sets up Socket.IO connections
-const socketSetup = (server: HttpServer): void => {
+const socketSetup = (server: HttpServer): Server => {
   const io = new Server(server);
 
   //This resolve the cors issue.
@@ -23,14 +23,12 @@ const socketSetup = (server: HttpServer): void => {
     });
 
     //emits createRoom 
-    socket.on('createRoom', (roomName) => {
+    socket.on('createRoom', (roomDetails) => {
       // Handle the room creation logic here
-      // You can emit messages back to the client or broadcast messages to all clients
-      // For simplicity, let's just log the room name for now
-      console.log(`Room created >>>>>${roomName}`);
+      console.log(`Room created >>>>>${roomDetails}`);
     });
   });
-
+  return io
 };
 
 export default socketSetup;
