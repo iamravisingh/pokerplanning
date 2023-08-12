@@ -23,13 +23,6 @@ export const LandingScreen = () => {
       <Box>
         <img alt="fibonacci_image" src={FibonacciImage} />
       </Box>
-      {/* <h2>Planning Poker</h2>
-      <span>Online Planning Poker for Agile Teams</span>
-      <Box mt={2} className="createRoom">
-        <Button variant="contained" onClick={handleCreateRoom}>
-          lets start planning
-        </Button>
-      </Box> */}
     </Box>
   );
 };

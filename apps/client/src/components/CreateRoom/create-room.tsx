@@ -50,7 +50,7 @@ export const CreateRoom = (): JSX.Element => {
             required
             autoComplete='false'
           />
-          <Button variant="contained">Create Room</Button>
+          <Button variant="contained" className="createRoom">Create Room</Button>
         </Box>
       </Paper>
     </Box>

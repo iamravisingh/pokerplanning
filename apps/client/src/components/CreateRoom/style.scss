@@ -23,14 +23,13 @@
     width: 50%;
     flex-direction: column;
 
-    label{
-        color: #FFF;
-        font-family: Istok Web;
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 700;
-        line-height: normal;
-        
+    label {
+      color: #fff;
+      font-family: Istok Web;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
     }
     .roomFormFields {
       padding: 20px;
@@ -44,13 +43,21 @@
       background: #282a3a;
     }
   }
-  button {
+  .createRoom {
+    padding: 12px;
     border-radius: 10px;
     border: 1.5px solid rgba(164, 164, 164, 0.29);
     background: #d9d9d9;
     color: #000;
+    text-align: center;
+    font-family: Istok Web;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
     &:hover {
       background: #4355f5;
+      color: #ffff
     }
   }
 }
