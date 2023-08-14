@@ -35,7 +35,7 @@
       padding: 20px;
       display: flex;
       flex-direction: column;
-      gap: 25px;
+      gap: 30px;
     }
     input {
       border-radius: 10px;
@@ -43,7 +43,7 @@
       background: #282a3a;
     }
   }
-  .createRoom {
+  .createRoomButton {
     padding: 12px;
     border-radius: 10px;
     border: 1.5px solid rgba(164, 164, 164, 0.29);
@@ -57,7 +57,18 @@
     line-height: normal;
     &:hover {
       background: #4355f5;
-      color: #ffff
+      color: #ffff;
+    }
+  }
+  input {
+    color: #ffff;
+    &::placeholder {
+      color: #858585;
+      font-family: Istok Web;
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
     }
   }
 }
