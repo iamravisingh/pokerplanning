@@ -14,7 +14,7 @@ export const LandingScreen = () => {
     <Box className="landingScreenContainer">
       <Box className="landingContent">
         <h1 className="heading">Plan Better</h1>
-        <Typography>
+        <Typography className="caption">
           Create better estimates, healthier sprints, and happier teams.
         </Typography>
         <Button variant="contained" onClick={handleCreateRoom}>
