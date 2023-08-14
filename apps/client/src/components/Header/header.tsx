@@ -1,4 +1,4 @@
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import Box from '@mui/material/Box';
 import POKER_LOGO from '../../assets/images/pokerlogo.svg';
 import { InvitePlayersButton } from './components/InviteDialog';
@@ -7,8 +7,6 @@ import './style.scss';
 
 export const Header = () => {
   console.log("isPlanningStarted>>>>>>>", isPlanningStarted())  
-  const location = useLocation();
-//   const isPlanningStarted = location.pathname.includes("roomKey=")
   return (
     <Box className="headerContainer">
       <Box width={250} height={95} className="logoContainer">

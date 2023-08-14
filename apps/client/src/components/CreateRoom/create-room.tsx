@@ -34,7 +34,7 @@ export const CreateRoom = (): JSX.Element => {
     }
     console.log("collectCreateRoomData >>>>>>>>>", collectCreateRoomData)
     if(roomName && userName){
-      navigate("/room/?roomKey=fdfdfdf");
+      navigate("/room/?roomKey=testing");
     }
   }
 

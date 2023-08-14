@@ -1,25 +1,44 @@
-import { useState } from 'react';
+import { useState, SyntheticEvent } from 'react';
 //mui components
 import Box from '@mui/material/Box';
 import Dialog from '@mui/material/Dialog';
 import Button from '@mui/material/Button';
-import CloseIcon from '@mui/icons-material/Close';
 import DialogContent from '@mui/material/DialogContent';
 import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
+import Typography from '@mui/material/Typography';
+
 //mui icons
+import CloseIcon from '@mui/icons-material/Close';
 import IconButton from '@mui/material/IconButton';
 import GroupAddIcon from '@mui/icons-material/GroupAdd';
+import { DialogStyles } from './constant';
 import './style.scss';
 
 export const InvitePlayersButton = () => {
   const [openDialog, setDialogOpen] = useState(false);
+  const [notify, setNotify] = useState(false);
   const handleClick = () => {
     setDialogOpen(true);
   };
   const handleClose = () => {
     setDialogOpen(false);
   };
+
+  const handleCopy = () => {
+    handleClose();
+    setNotify(true);
+  };
+
+  const handleToastClose = (event: SyntheticEvent | Event, reason?: string) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setNotify(false);
+  };
+
   const appURL = window.location.href;
   return (
     <Box className="invitePlayerWrapper">
@@ -29,35 +48,58 @@ export const InvitePlayersButton = () => {
         className="inviteButton"
       >
         <Box className="inviteButtonContent">
-          <GroupAddIcon /> Invite Player
+          <GroupAddIcon /> <Typography>Invite Player</Typography>
         </Box>
       </Button>
       <Dialog
         open={openDialog}
         onClose={handleClose}
         className="invitePlayerDialog"
+        fullWidth
+        PaperProps={DialogStyles.dialog}
       >
-        <DialogTitle id="invitePlayerTitle">
-          <Box className="dialogTitle">
-            <span>Invite Your Team</span>
-            <IconButton aria-label="close" onClick={handleClose}>
-              <CloseIcon />
-            </IconButton>
-          </Box>
+        <DialogTitle sx={DialogStyles.dialogTitle}>
+          <IconButton aria-label="close" onClick={handleClose}>
+            <CloseIcon
+              sx={{
+                color: '#fff',
+              }}
+            />
+          </IconButton>
         </DialogTitle>
-        <DialogContent>
-          <Box className="invitePlayersContent">
+        <DialogContent sx={DialogStyles.dialogContent}>
+          <Box
+            className="invitePlayersContent"
+            sx={DialogStyles.dialogContentChildren.container}
+          >
+            <Typography>Invite Your Team</Typography>
             <TextField
-              autoFocus
-              variant="standard"
-              margin="dense"
+              variant="outlined"
               fullWidth
               value={appURL}
+              inputProps={DialogStyles.dialogContentChildren.textField}
             />
-            <Button variant="contained">Copy Invitation Link</Button>
+            <Button
+              variant="contained"
+              className="copyButton"
+              onClick={handleCopy}
+              fullWidth
+              sx={DialogStyles.dialogContentChildren.buttonStyles}
+            >
+              Copy Invitation Link
+            </Button>
           </Box>
         </DialogContent>
       </Dialog>
+      <Snackbar
+        open={notify}
+        autoHideDuration={2000}
+        onClose={handleToastClose}
+      >
+        <Alert severity="success" elevation={6} variant="filled">
+          <Typography>Room link copied to clipboard</Typography>
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };
