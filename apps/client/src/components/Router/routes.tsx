@@ -11,7 +11,7 @@ const AppRouter = () => {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/create/room" element={<CreateRoom />} />
-          <Route path="/room/:roomKey" element={<RoomPlayground/>}/>
+          <Route path="/room" element={<RoomPlayground/>}/>
         </Routes>
       </Layout>
     </BrowserRouter>

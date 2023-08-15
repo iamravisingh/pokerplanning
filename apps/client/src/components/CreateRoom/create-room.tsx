@@ -1,4 +1,6 @@
 import { useState, ChangeEvent } from 'react';
+import { useAppDispatch } from '../../store/hooks';
+import { setPlanningStart } from "../../store/reducers/planningSlice"
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -9,7 +11,8 @@ import './style.scss';
 type RoomType = "roomName" | "userName";
 
 export const CreateRoom = (): JSX.Element => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
   const [roomName, setRoomName] = useState('');
   const [ userName, setUserName] = useState('');
 
@@ -34,6 +37,7 @@ export const CreateRoom = (): JSX.Element => {
     }
     console.log("collectCreateRoomData >>>>>>>>>", collectCreateRoomData)
     if(roomName && userName){
+      dispatch(setPlanningStart(true));
       navigate("/room/?roomKey=testing");
     }
   }
