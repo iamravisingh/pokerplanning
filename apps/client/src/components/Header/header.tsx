@@ -9,7 +9,6 @@ import './style.scss';
 
 export const Header = () => {
   const checkPlanningStarted = useAppSelector(isPlanningStarted);  
-  console.log("checkPlanningStarted >>>>>>>", checkPlanningStarted)
   return (
     <Box className="headerContainer">
       <Box width={250} height={95} className="logoContainer">
