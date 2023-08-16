@@ -8,7 +8,6 @@ import { CardDesk } from "./components";
 import "./style.scss";
 
 export const RoomPlayground = () => {
-    const [ selectedCount, setSelectedCount] = useState(0)
     const dispatch = useAppDispatch();
     const checkPlanningStarted = useAppSelector(isPlanningStarted)
     const location = useLocation();
@@ -23,7 +22,6 @@ export const RoomPlayground = () => {
         }
     },[]);
 
-    console.log("inside RoomPlayground >>>>>>>>>", roomKey)
     return (
         <Box>
             <CardDesk/>

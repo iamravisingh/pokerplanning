@@ -14,8 +14,8 @@ const GAME_OPTIONS = {
   NEW_VOTING: 'Start New Voting',
 };
 export const CardDesk = (): JSX.Element => {
-  const [selectedCount, setSelectedCount] = useState<number | null>();
-  const fibRange = fibonacciRange(12);
+  const [selectedCount, setSelectedCount] = useState<number | null>(null);
+  const fibRange = [...new Set(fibonacciRange(12))];
 
   const handleCardClick = (count: number) => () => {
     setSelectedCount(count);
@@ -32,13 +32,13 @@ export const CardDesk = (): JSX.Element => {
     return <Typography>{GAME_OPTIONS.PICK}</Typography>;
   };
 
-  const deskText = selectedCount  ? GAME_OPTIONS.REVEAL : GAME_OPTIONS.PICK
+  const deskText = selectedCount !== null  ? GAME_OPTIONS.REVEAL : GAME_OPTIONS.PICK
   return (
     <Box>
       <Box className="cardContainer">
         <Card className="card">{cardContent(deskText)}</Card>
         <Box className="selectedCard">
-          {selectedCount && (
+          {selectedCount !== null && (
             <Box className="selectedCardCount">
               <Button className="selectedCardNumber">
                 <Typography>{selectedCount}</Typography>
@@ -50,12 +50,13 @@ export const CardDesk = (): JSX.Element => {
       <Box className="cardCountContainer">
         <Box className="cardHelper">
           <Typography>Choose Your Card Below</Typography>
-          <img width={40} height={40} src={HandFinger} alt="finger" />
+          <img width={40} height={40} src={HandFinger} alt="finger"/>
         </Box>
         <Box className="cardCount">
           {fibRange.map((item) => {
             return (
               <CardPicker
+                classes={selectedCount === item ? "active" : ""}
                 key={item}
                 value={item}
                 handleClick={handleCardClick(item)}

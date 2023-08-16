@@ -12,7 +12,7 @@
         transform: scale(1.2); /* Increase the scale on hover */
         background: #50577a;
         p{
-            color: #fff;
+          color: #fff;
         }
       }
       p {
@@ -23,6 +23,16 @@
         font-style: normal;
         font-weight: 800;
         line-height: normal;
+      }
+    }
+    .active{
+      transform: scale(1.2); /* Increase the scale on hover */
+      background: #50577a;
+      .cardNumber {
+        background: #50577a;
+      }
+      p{
+        color: #fff;
       }
     }
   }
