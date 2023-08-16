@@ -22,7 +22,7 @@ export const CardDesk = (): JSX.Element => {
   };
 
   const cardContent = (text?: string) => {
-    if (text) {
+    if (text !== GAME_OPTIONS.PICK) {
       return (
         <Button className="deskButton" variant="contained">
           <Typography>{text}</Typography>
@@ -31,10 +31,12 @@ export const CardDesk = (): JSX.Element => {
     }
     return <Typography>{GAME_OPTIONS.PICK}</Typography>;
   };
+
+  const deskText = selectedCount  ? GAME_OPTIONS.REVEAL : GAME_OPTIONS.PICK
   return (
     <Box>
       <Box className="cardContainer">
-        <Card className="card">{cardContent()}</Card>
+        <Card className="card">{cardContent(deskText)}</Card>
         <Box className="selectedCard">
           {selectedCount && (
             <Box className="selectedCardCount">
