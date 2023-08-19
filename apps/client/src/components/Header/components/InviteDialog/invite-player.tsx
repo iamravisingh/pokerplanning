@@ -19,6 +19,7 @@ import './style.scss';
 
 export const InvitePlayersButton = () => {
   const [openDialog, setDialogOpen] = useState(false);
+  const appURL = window.location.href;
   const [notify, setNotify] = useState(false);
   const handleClick = () => {
     setDialogOpen(true);
@@ -26,10 +27,15 @@ export const InvitePlayersButton = () => {
   const handleClose = () => {
     setDialogOpen(false);
   };
-
-  const handleCopy = () => {
-    handleClose();
-    setNotify(true);
+  const handleCopy = async () => {
+    try {
+      // Copy text to clipboard
+      await navigator.clipboard.writeText(appURL);
+      handleClose();
+      setNotify(true);
+    } catch (error) {
+      console.error("Error copying text: ", error);
+    }
   };
 
   const handleToastClose = (event: SyntheticEvent | Event, reason?: string) => {
@@ -39,7 +45,6 @@ export const InvitePlayersButton = () => {
     setNotify(false);
   };
 
-  const appURL = window.location.href;
   return (
     <Box className="invitePlayerWrapper">
       <Button
@@ -93,7 +98,7 @@ export const InvitePlayersButton = () => {
       </Dialog>
       <Snackbar
         open={notify}
-        autoHideDuration={2000}
+        autoHideDuration={1000}
         onClose={handleToastClose}
       >
         <Alert severity="success" elevation={6} variant="filled">
