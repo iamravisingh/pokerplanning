@@ -1,1 +1,1 @@
-export { useSocketConnection, SocketInstance } from './useSocket';
+export { useSocketConnection } from './useSocket';
