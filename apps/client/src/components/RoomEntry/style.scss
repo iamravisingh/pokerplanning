@@ -1,4 +1,4 @@
-.createRoomContainer {
+.roomEntryContainer {
   margin-top: 15px;
   width: 100%;
   display: flex;
@@ -15,7 +15,7 @@
     width: 50%;
     margin-bottom: 20px;
   }
-  .createRoomFormContainer {
+  .roomEntryFormContainer {
     border-radius: 20px;
     border: 1px solid rgba(164, 164, 164, 0.29);
     background: rgba(40, 42, 58, 0.5);
@@ -43,7 +43,7 @@
       background: #282a3a;
     }
   }
-  .createRoomButton {
+  .roomEntryButton {
     padding: 12px;
     border-radius: 10px;
     border: 1.5px solid rgba(164, 164, 164, 0.29);
@@ -58,6 +58,11 @@
     &:hover {
       background: #4355f5;
       color: #ffff;
+    }
+  }
+  .Join {
+    &:hover {
+      background: linear-gradient(90deg, #177637 0%, #0ba360 100%);
     }
   }
   input {

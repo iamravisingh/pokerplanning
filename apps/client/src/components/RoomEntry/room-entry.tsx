@@ -1,4 +1,4 @@
-import { useState, ChangeEvent } from 'react';
+import { useState, ChangeEvent, FC } from 'react';
 import { useAppDispatch } from '../../store/hooks';
 import { setPlanningStart } from '../../store/reducers/planningSlice';
 import { useNavigate } from 'react-router-dom';
@@ -8,11 +8,12 @@ import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import RoomService from '../../services/room';
 import { useSocketConnection } from '../../common/hooks';
+import { RoomType, RoomEntryType } from './type';
+import { RoomsType } from './constant';
 import './style.scss';
 
-type RoomType = 'roomName' | 'userName';
-
-export const CreateRoom = (): JSX.Element => {
+export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
+  const { type = 'create' } = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { socketInstance } = useSocketConnection();
@@ -56,24 +57,33 @@ export const CreateRoom = (): JSX.Element => {
     }
   };
 
+  const handleRoomEntry = () => {
+    if (type === RoomsType.CREATE) {
+      handleCreateRoom();
+    }
+  };
+
+  const showRoomName = type === RoomsType.CREATE;
+
   return (
-    <Box className="createRoomContainer">
-      <h3>Create a Room to Start Voting</h3>
-      <Paper elevation={3} className="createRoomFormContainer">
+    <Box className="roomEntryContainer">
+      <h3>{`${type} a Room to Start Voting`}</h3>
+      <Paper elevation={3} className="roomEntryFormContainer">
         <Box className="roomFormFields" mt={3}>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Room Name"
-            fullWidth
-            variant="outlined"
-            placeholder="Give your room a name"
-            value={roomName}
-            onChange={handleChange('roomName')}
-            required
-            autoComplete="false"
-          />
+          {showRoomName && (
+            <TextField
+              autoFocus
+              margin="dense"
+              id="name"
+              label="Room Name"
+              fullWidth
+              variant="outlined"
+              placeholder="Give your room a name"
+              value={roomName}
+              onChange={handleChange('roomName')}
+              required
+            />
+          )}
           <TextField
             margin="dense"
             id="name"
@@ -84,14 +94,13 @@ export const CreateRoom = (): JSX.Element => {
             value={userName}
             onChange={handleChange('userName')}
             required
-            autoComplete="false"
           />
           <Button
             variant="contained"
-            className="createRoomButton"
-            onClick={handleCreateRoom}
+            className={`roomEntryButton ${type}`}
+            onClick={handleRoomEntry}
           >
-            Create Room
+            {`${type} Room`}
           </Button>
         </Box>
       </Paper>

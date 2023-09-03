@@ -1,0 +1,1 @@
+export { RoomEntry } from "./room-entry"

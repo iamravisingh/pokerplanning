@@ -17,13 +17,13 @@ export const createRoom = (req: Request, res: Response) => {
   };
   if (!roomName) {
     return res
-    .status(404)
-    .json({ status: 404, message: 'room name is required' });
+    .status(422)
+    .json({ status: 422, message: 'room name is required' });
   }
   if (!userName) {
     return res
-    .status(404)
-    .json({ status: 404, message: 'user name is required' });
+    .status(422)
+    .json({ status: 422, message: 'user name is required' });
   }
   io.emit(roomName, newRoomDetails)
   //if roomName and userName is provided, proceed to create a new room
@@ -42,7 +42,7 @@ export const getRoomByKey = (req: Request, res: Response) => {
   //if no room found with passed key then return not found error 
   const roomDetails = roomsDetails.get(roomKey);
   if(!roomDetails) {
-    return res.json({ status: 404, message: "Room not found" });
+    return res.json({ status: 422, message: "Invalid room key" });
   }
   return res.json({ status: 200, roomDetails})
 };
