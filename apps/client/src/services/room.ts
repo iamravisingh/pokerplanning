@@ -27,19 +27,19 @@ export type GetRoomByIdResponseData = {
 };
 
 class RoomService {
-  static BaseUrl = SERVER_URL;
+ static BaseUrl = `${SERVER_URL}/api`;
 
   static getRooms(): Promise<GetRoomResponseData> {
-    const URL = `${SERVER_URL}/rooms`;
+    const URL = `${this.BaseUrl}/rooms`;
     return FetchUtil.call(URL, { method: 'GET' });
   }
   static createRoom(options: FetchOptions): Promise<CreateRoomResponseData> {
-    const URL = `${SERVER_URL}/room`;
+    const URL = `${this.BaseUrl}/room`;
     const { method, body } = options;
     return FetchUtil.call(URL, { method, body });
   }
   static getRoomById(key: string): Promise<GetRoomByIdResponseData> {
-    const URL = `${SERVER_URL}/room?roomKey=${key}`;
+    const URL = `${this.BaseUrl}/room?roomKey=${key}`;
     return FetchUtil.call(URL, { method: 'GET' });
   }
 }

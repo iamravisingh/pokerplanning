@@ -25,7 +25,7 @@ export const createRoom = (req: Request, res: Response) => {
     .status(404)
     .json({ status: 404, message: 'user name is required' });
   }
-  io.emit("createRoom", newRoomDetails)
+  io.emit(roomName, newRoomDetails)
   //if roomName and userName is provided, proceed to create a new room
   //TODO: for now were are storing the room details in roomDetails variable and will be used till the connection is terminated.
   // we need to replace this with some proper solution like redis/mongodb

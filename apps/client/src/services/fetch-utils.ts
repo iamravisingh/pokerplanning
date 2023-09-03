@@ -1,7 +1,8 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 export type FetchOptions = {
   method?: string;
   headers?: Record<string, string>;
-  body?: string | FormData;
+  body?: any;
 };
 
 class FetchUtil {
@@ -11,7 +12,13 @@ class FetchUtil {
    * @returns A promise which resolves to response-data or rejects with a corresponding error object, which contains requested url as well
    */
   static call(url: string, options: FetchOptions) {
-    return fetch(url, options).then((response) => {
+    const fetchOptions = {
+      method: 'GET',
+      ...options,
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(options?.body),
+    };
+    return fetch(url, fetchOptions).then((response) => {
       if (!response.ok) {
         return Promise.reject(
           new Error(
