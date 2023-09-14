@@ -1,5 +1,6 @@
 import { Server, Socket } from "socket.io";
 import { Server as HttpServer } from "http";
+import { rooms } from "./roomInMemDb";
 
 // Export a function that sets up Socket.IO connections
 const socketSetup = (server: HttpServer): Server => {
@@ -11,21 +12,60 @@ const socketSetup = (server: HttpServer): Server => {
   });
 
   io.on("connection", (socket: Socket) => {
-    console.log("A user connected");
-
-    socket.on("cardSelection", (data) => {
-      console.log("Card selected >>>>>>>", data);
-      io.emit("cardSelection", data);
+    socket.on('join', (roomKey, username) => {
+      const room = rooms.get(roomKey);
+      if (room) {
+        room.users.push(username);
+        socket.data.username = username;
+        socket.join(roomKey);
+        io.to(roomKey).emit(
+        'joined', 
+        // Every time we will send entire room data
+        // and change happend , TODO we will decide here
+        {
+          room,
+          username
+        }
+        );
+      } else {
+        socket.emit('roomNotFound', { message: 'Room not found' });
+      }
+    });
+    socket.on('cardSelection', (roomKey, username, cardSelected) => {
+      const room = rooms.get(roomKey);
+      if (room) {
+          // Write Logic to make Card Selection
+          // Update Room Details
+          io.to(roomKey).emit(
+            'cardSelected', 
+            // Every time we will send entire room data
+            // and change happend , TODO we will decide here
+            {
+              room,
+              username,
+              cardSelected
+            }
+            );
+          
+      } else {
+        socket.emit('roomNotFound', { message: 'Room not found' });
+      }
     });
 
-    socket.on("disconnect", () => {
-      console.log("A user disconnected");
-    });
-
-    //emits createRoom 
-    socket.on('createRoom', (roomDetails) => {
-      // Handle the room creation logic here
-      console.log(`Room created >>>>>${roomDetails}`);
+    socket.on('disconnect', () => {
+      // Remove the user from all rooms when they disconnect
+      const roomsToRemoveUserFrom = [];
+      // TODO -  we could do it with reduce in one go but Map doesnt support reduce upfront
+      rooms.forEach((roomData, roomKey) => {
+        if (roomData.users.includes(socket.data.username)) {
+          roomData.users = roomData.users.filter((user) => user !== socket.data.username);
+          roomsToRemoveUserFrom.push(roomKey);
+        }
+      });
+      // Emit an event to inform other users in the rooms
+      roomsToRemoveUserFrom.forEach((roomKey) => {
+        io.to(roomKey).emit('userLeft', { username: socket.data.username, roomKey });
+      });
     });
   });
   return io
