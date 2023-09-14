@@ -3,7 +3,7 @@ import { createRoom, getRoomByKey, getRoomsDetails } from '../controllers/roomCo
 
 const router: Router = express.Router();
 
-router.post('/room/', createRoom); //create new room 
+router.post('/room', createRoom); //create new room 
 router.get('/room/', getRoomByKey); // get room by key
 router.get('/rooms', getRoomsDetails) // get all rooms details 
 
