@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
-import { io } from "../api"
+import { io } from '../api';
 import { nanoid } from 'nanoid';
 import { rooms } from './roomInMemDb';
 
-//Variable to store the room details as a memory storage, 
+//Variable to store the room details as a memory storage,
 //we need to remove this once we finalize storage approach
 
 export const createRoom = (req: Request, res: Response) => {
@@ -18,15 +18,15 @@ export const createRoom = (req: Request, res: Response) => {
   };
   if (!roomName) {
     return res
-    .status(422)
-    .json({ status: 422, message: 'room name is required' });
+      .status(422)
+      .json({ status: 422, message: 'room name is required' });
   }
   if (!userName) {
     return res
-    .status(422)
-    .json({ status: 422, message: 'user name is required' });
+      .status(422)
+      .json({ status: 422, message: 'user name is required' });
   }
-  io.emit(roomName, newRoomDetails)
+  io.emit(roomName, newRoomDetails);
   //if roomName and userName is provided, proceed to create a new room
   //TODO: for now were are storing the room details in roomDetails variable and will be used till the connection is terminated.
   // we need to replace this with some proper solution like redis/mongodb
@@ -45,7 +45,7 @@ export const getRoomByKey = (req: Request, res: Response) => {
   if(!roomDetails) {
     return res.json({ status: 422, message: "Invalid room key" });
   }
-  return res.json({ status: 200, roomDetails})
+  return res.json({ status: 200, roomDetails });
 };
 
 export const getRoomsDetails = (req: Request, res: Response) => {

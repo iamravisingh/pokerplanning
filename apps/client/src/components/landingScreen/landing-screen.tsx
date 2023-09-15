@@ -18,7 +18,7 @@ export const LandingScreen = () => {
           Create better estimates, healthier sprints, and happier teams.
         </Typography>
         <Button variant="contained" onClick={handleCreateRoom}>
-          <Typography>Lets Start Planning</Typography>
+          <Typography>Start Planning Now!</Typography>
         </Button>
       </Box>
       <Box>
@@ -27,4 +27,3 @@ export const LandingScreen = () => {
     </Box>
   );
 };
-  

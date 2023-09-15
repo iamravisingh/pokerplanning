@@ -7,7 +7,6 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import RoomService from '../../services/room';
-import { useSocketConnection } from '../../common/hooks';
 import { RoomType, RoomEntryType } from './type';
 import { RoomsType } from './constant';
 import './style.scss';
@@ -16,7 +15,6 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   const { type = 'create' } = props;
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { socketInstance } = useSocketConnection();
   const [roomName, setRoomName] = useState('');
   const [userName, setUserName] = useState('');
 
@@ -46,9 +44,9 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
     };
     if (roomName && userName) {
       try {
+        console.log("RoomService >>>>>>>", RoomService);
         const createdRoomResult = await RoomService.createRoom(options);
         const { roomKey } = createdRoomResult;
-        socketInstance?.connect();
         dispatch(setPlanningStart(true));
         navigate(`/room/?roomKey=${roomKey}`);
       } catch (e) {
@@ -64,7 +62,6 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   };
 
   const showRoomName = type === RoomsType.CREATE;
-
   return (
     <Box className="roomEntryContainer">
       <h3>{`${type} a Room to Start Voting`}</h3>
