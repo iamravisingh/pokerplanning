@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FC } from 'react';
 import { useAppDispatch } from '../../store/hooks';
 import { setPlanningStart } from '../../store/reducers/planningSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -10,13 +10,17 @@ import RoomService from '../../services/room';
 import { RoomType, RoomEntryType } from './type';
 import { RoomsType } from './constant';
 import './style.scss';
+import { useSocketConnection } from '../../common/hooks';
 
 export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   const { type = 'create' } = props;
+  const socket = useSocketConnection();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [roomName, setRoomName] = useState('');
   const [userName, setUserName] = useState('');
+  const roomKey = new URLSearchParams(location.search).get('roomKey') || '';
 
   const handleChange =
     (type: RoomType = 'roomName') =>
@@ -44,11 +48,10 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
     };
     if (roomName && userName) {
       try {
-        console.log("RoomService >>>>>>>", RoomService);
         const createdRoomResult = await RoomService.createRoom(options);
-        const { roomKey } = createdRoomResult;
+        const { roomKey: createdRoomKey } = createdRoomResult;
         dispatch(setPlanningStart(true));
-        navigate(`/room/?roomKey=${roomKey}`);
+        navigate(`/room/?roomKey=${createdRoomKey}`);
       } catch (e) {
         //
       }
@@ -56,12 +59,20 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   };
 
   const handleRoomEntry = () => {
+    //TODO: we should have a one instance of socket which 
+    socket.connect();
     if (type === RoomsType.CREATE) {
       handleCreateRoom();
+    } else if (type === RoomsType.JOIN) {
+      if(socket){
+        socket?.emit('join', roomKey, userName);
+        navigate(`/room/?roomKey=${roomKey}`);
+      }
     }
   };
 
   const showRoomName = type === RoomsType.CREATE;
+  console.log('type in room entry >>>>>>>', type);
   return (
     <Box className="roomEntryContainer">
       <h3>{`${type} a Room to Start Voting`}</h3>

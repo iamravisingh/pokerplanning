@@ -2,17 +2,19 @@ import { Server, Socket } from "socket.io";
 import { Server as HttpServer } from "http";
 import { rooms } from "./roomInMemDb";
 
-// Export a function that sets up Socket.IO connections
+// Exports a function that sets up Socket.IO connections
 const socketSetup = (server: HttpServer): Server => {
   const io = new Server(server);
 
   //This resolve the cors issue.
   io.engine.on("headers", (headers) => {
-    headers["Access-Control-Allow-Origin"] = "*"; // url to all
+    headers["Access-Control-Allow-Origin"] = "*"; //url to all
   });
 
   io.on("connection", (socket: Socket) => {
+    console.log("User connection established, Yay🫡")
     socket.on('join', (roomKey, username) => {
+      console.log("used joined >>>>>>", roomKey, username);
       const room = rooms.get(roomKey);
       if (room) {
         room.users.push(username);
@@ -21,17 +23,19 @@ const socketSetup = (server: HttpServer): Server => {
         io.to(roomKey).emit(
         'joined', 
         // Every time we will send entire room data
-        // and change happend , TODO we will decide here
+        // and change happened , TODO we will decide here
         {
           room,
           username
         }
         );
+        rooms.set(roomKey, room);
       } else {
         socket.emit('roomNotFound', { message: 'Room not found' });
       }
     });
     socket.on('cardSelection', (roomKey, username, cardSelected) => {
+      console.log("inside cardSelection", roomKey, username, cardSelected);
       const room = rooms.get(roomKey);
       if (room) {
           // Write Logic to make Card Selection
@@ -53,6 +57,7 @@ const socketSetup = (server: HttpServer): Server => {
     });
 
     socket.on('disconnect', () => {
+      console.log("User disconnected ☹️")
       // Remove the user from all rooms when they disconnect
       const roomsToRemoveUserFrom = [];
       // TODO -  we could do it with reduce in one go but Map doesnt support reduce upfront
@@ -63,6 +68,7 @@ const socketSetup = (server: HttpServer): Server => {
         }
       });
       // Emit an event to inform other users in the rooms
+      console.log("removing users roomsToRemoveUserFrom >>>>>>", roomsToRemoveUserFrom)
       roomsToRemoveUserFrom.forEach((roomKey) => {
         io.to(roomKey).emit('userLeft', { username: socket.data.username, roomKey });
       });

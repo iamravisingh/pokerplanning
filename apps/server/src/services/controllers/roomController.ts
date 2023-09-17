@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import { io } from '../api';
+// import { io } from '../api';
 import { nanoid } from 'nanoid';
 import { rooms } from './roomInMemDb';
 
@@ -26,7 +26,7 @@ export const createRoom = (req: Request, res: Response) => {
       .status(422)
       .json({ status: 422, message: 'user name is required' });
   }
-  io.emit(roomName, newRoomDetails);
+  // io.emit(roomName, newRoomDetails);
   //if roomName and userName is provided, proceed to create a new room
   //TODO: for now were are storing the room details in roomDetails variable and will be used till the connection is terminated.
   // we need to replace this with some proper solution like redis/mongodb
@@ -42,6 +42,7 @@ export const getRoomByKey = (req: Request, res: Response) => {
   //find the room with room key and return the room object
   //if no room found with passed key then return not found error 
   const roomDetails = rooms.get(roomKey as string);
+  console.log("rooms in memdb>>>>>>", rooms)
   if(!roomDetails) {
     return res.json({ status: 422, message: "Invalid room key" });
   }
@@ -51,5 +52,6 @@ export const getRoomByKey = (req: Request, res: Response) => {
 export const getRoomsDetails = (req: Request, res: Response) => {
   //fromEntries is used to convert Map object to basic object structure
   const details = Object.fromEntries(rooms);
-  return res.json({ status: 200, roomsDetails: details })
+  const roomCount = rooms.size
+  return res.json({ status: 200, count: roomCount, roomsDetails: details })
 }
