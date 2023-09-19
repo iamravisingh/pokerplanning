@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FibonacciImage from '../../assets/images/card.svg';
@@ -11,19 +12,25 @@ export const LandingScreen = () => {
     navigate('/create/room');
   };
   return (
-    <Box className="landingScreenContainer">
-      <Box className="landingContent">
-        <h1 className="heading">Plan Better</h1>
-        <Typography className="caption">
-          Create better estimates, healthier sprints, and happier teams.
-        </Typography>
-        <Button variant="contained" onClick={handleCreateRoom}>
-          <Typography>Start Planning Now!</Typography>
-        </Button>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      <Box className="landingScreenContainer">
+        <Box className="landingContent">
+          <h1 className="heading">Plan Better</h1>
+          <Typography className="caption">
+            Create better estimates, healthier sprints, and happier teams.
+          </Typography>
+          <Button variant="contained" onClick={handleCreateRoom}>
+            <Typography>Start Planning Now!</Typography>
+          </Button>
+        </Box>
+        <Box>
+          <img alt="fibonacci_image" src={FibonacciImage} />
+        </Box>
       </Box>
-      <Box>
-        <img alt="fibonacci_image" src={FibonacciImage} />
-      </Box>
-    </Box>
+    </motion.div>
   );
 };
