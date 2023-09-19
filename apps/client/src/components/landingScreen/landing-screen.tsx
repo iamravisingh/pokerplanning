@@ -12,25 +12,21 @@ export const LandingScreen = () => {
     navigate('/create/room');
   };
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <Box className="landingScreenContainer">
-        <Box className="landingContent">
-          <h1 className="heading">Plan Better</h1>
-          <Typography className="caption">
-            Create better estimates, healthier sprints, and happier teams.
-          </Typography>
-          <Button variant="contained" onClick={handleCreateRoom}>
-            <Typography>Start Planning Now!</Typography>
-          </Button>
-        </Box>
-        <Box>
-          <img alt="fibonacci_image" src={FibonacciImage} />
-        </Box>
+    <Box className="landingScreenContainer">
+      <Box className="landingContent">
+        <h1 className="heading">Plan Better</h1>
+        <Typography className="caption">
+          Create better estimates, healthier sprints, and happier teams.
+        </Typography>
+        <Button variant="contained" onClick={handleCreateRoom}>
+          <Typography>Start Planning Now!</Typography>
+        </Button>
       </Box>
-    </motion.div>
+      <Box>
+        <motion.div animate={{ x: [0, 50, 0] }}>
+          <img alt="fibonacci_image" src={FibonacciImage} />
+        </motion.div>
+      </Box>
+    </Box>
   );
 };
