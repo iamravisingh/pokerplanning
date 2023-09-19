@@ -22,7 +22,6 @@ export const RoomPlayground = () => {
   useEffect(() => {
     socket.connect();
     dispatch(setPlanningStart(true));
-
     return () => {
       dispatch(setPlanningStart(false));
       socket.disconnect();
@@ -31,7 +30,7 @@ export const RoomPlayground = () => {
 
   return (
     <Box>
-      <CardDesk socket={socket} roomKey={roomKey}/>
+      <CardDesk socket={socket} roomKey={roomKey} />
     </Box>
   );
 };

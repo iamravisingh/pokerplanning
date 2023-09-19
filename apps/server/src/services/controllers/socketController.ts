@@ -14,8 +14,8 @@ const socketSetup = (server: HttpServer): Server => {
   io.on("connection", (socket: Socket) => {
     console.log("User connection established, Yay🫡")
     socket.on('join', (roomKey, username) => {
-      console.log("used joined >>>>>>", roomKey, username);
       const room = rooms.get(roomKey);
+      console.log("used joined >>>>>>", roomKey, username, room);
       if (room) {
         room.users.push(username);
         socket.data.username = username;
@@ -43,7 +43,7 @@ const socketSetup = (server: HttpServer): Server => {
           io.to(roomKey).emit(
             'cardSelected', 
             // Every time we will send entire room data
-            // and change happend , TODO we will decide here
+            // and change happened , TODO we will decide here
             {
               room,
               username,
@@ -60,7 +60,7 @@ const socketSetup = (server: HttpServer): Server => {
       console.log("User disconnected ☹️")
       // Remove the user from all rooms when they disconnect
       const roomsToRemoveUserFrom = [];
-      // TODO -  we could do it with reduce in one go but Map doesnt support reduce upfront
+      // TODO -  we could do it with reduce in one go but Map doesn't support reduce upfront
       rooms.forEach((roomData, roomKey) => {
         if (roomData.users.includes(socket.data.username)) {
           roomData.users = roomData.users.filter((user) => user !== socket.data.username);
