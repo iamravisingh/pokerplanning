@@ -1,22 +1,28 @@
 import { useState, ChangeEvent, FC } from 'react';
+import { motion } from 'framer-motion';
 import { useAppDispatch } from '../../store/hooks';
 import { setPlanningStart } from '../../store/reducers/planningSlice';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import RoomService from '../../services/room';
+import { ANIMATION_TEMPLATE } from '../../common/constant';
 import { RoomType, RoomEntryType } from './type';
 import { RoomsType } from './constant';
 import './style.scss';
+import { useSocketConnection } from '../../common/hooks';
 
 export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   const { type = 'create' } = props;
+  const socket = useSocketConnection();
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
+  const location = useLocation();
   const [roomName, setRoomName] = useState('');
   const [userName, setUserName] = useState('');
+  const roomKey = new URLSearchParams(location.search).get('roomKey') || '';
 
   const handleChange =
     (type: RoomType = 'roomName') =>
@@ -44,11 +50,10 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
     };
     if (roomName && userName) {
       try {
-        console.log("RoomService >>>>>>>", RoomService);
         const createdRoomResult = await RoomService.createRoom(options);
-        const { roomKey } = createdRoomResult;
+        const { roomKey: createdRoomKey } = createdRoomResult;
         dispatch(setPlanningStart(true));
-        navigate(`/room/?roomKey=${roomKey}`);
+        navigate(`/room/?roomKey=${createdRoomKey}`);
       } catch (e) {
         //
       }
@@ -56,51 +61,61 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   };
 
   const handleRoomEntry = () => {
+    //TODO: we should have a one instance of socket which
+    socket.connect();
     if (type === RoomsType.CREATE) {
       handleCreateRoom();
+    } else if (type === RoomsType.JOIN) {
+      if (socket) {
+        socket?.emit('join', roomKey, userName);
+        navigate(`/room/?roomKey=${roomKey}`);
+      }
     }
   };
 
   const showRoomName = type === RoomsType.CREATE;
+  console.log('type in room entry >>>>>>>', type);
   return (
-    <Box className="roomEntryContainer">
-      <h3>{`${type} a Room to Start Voting`}</h3>
-      <Paper elevation={3} className="roomEntryFormContainer">
-        <Box className="roomFormFields" mt={3}>
-          {showRoomName && (
+    <motion.div {...ANIMATION_TEMPLATE.PAGE_LANDING}>
+      <Box className="roomEntryContainer">
+        <h3>{`${type} a Room to Start Voting`}</h3>
+        <Paper elevation={3} className="roomEntryFormContainer">
+          <Box className="roomFormFields" mt={3}>
+            {showRoomName && (
+              <TextField
+                autoFocus
+                margin="dense"
+                id="name"
+                label="Room Name"
+                fullWidth
+                variant="outlined"
+                placeholder="Give your room a name"
+                value={roomName}
+                onChange={handleChange('roomName')}
+                required
+              />
+            )}
             <TextField
-              autoFocus
               margin="dense"
               id="name"
-              label="Room Name"
+              label="Your Name"
               fullWidth
               variant="outlined"
-              placeholder="Give your room a name"
-              value={roomName}
-              onChange={handleChange('roomName')}
+              placeholder="Type your name"
+              value={userName}
+              onChange={handleChange('userName')}
               required
             />
-          )}
-          <TextField
-            margin="dense"
-            id="name"
-            label="Your Name"
-            fullWidth
-            variant="outlined"
-            placeholder="Type your name"
-            value={userName}
-            onChange={handleChange('userName')}
-            required
-          />
-          <Button
-            variant="contained"
-            className={`roomEntryButton ${type}`}
-            onClick={handleRoomEntry}
-          >
-            {`${type} Room`}
-          </Button>
-        </Box>
-      </Paper>
-    </Box>
+            <Button
+              variant="contained"
+              className={`roomEntryButton ${type}`}
+              onClick={handleRoomEntry}
+            >
+              {`${type} Room`}
+            </Button>
+          </Box>
+        </Paper>
+      </Box>
+    </motion.div>
   );
 };

@@ -1,4 +1,5 @@
 import { useNavigate } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import FibonacciImage from '../../assets/images/card.svg';
@@ -22,7 +23,9 @@ export const LandingScreen = () => {
         </Button>
       </Box>
       <Box>
-        <img alt="fibonacci_image" src={FibonacciImage} />
+        <motion.div animate={{ x: [0, 50, 0] }}>
+          <img alt="fibonacci_image" src={FibonacciImage} />
+        </motion.div>
       </Box>
     </Box>
   );
