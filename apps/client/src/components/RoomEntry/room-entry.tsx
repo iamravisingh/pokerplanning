@@ -2,7 +2,7 @@ import { useState, ChangeEvent, FC } from 'react';
 import { motion } from 'framer-motion';
 import { useAppDispatch } from '../../store/hooks';
 import { setPlanningStart } from '../../store/reducers/planningSlice';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -12,17 +12,16 @@ import { ANIMATION_TEMPLATE } from '../../common/constant';
 import { RoomType, RoomEntryType } from './type';
 import { RoomsType } from './constant';
 import './style.scss';
-import { useSocketConnection } from '../../common/hooks';
+import { useSocketConnection, useQueryParams } from '../../common/hooks';
 
 export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   const { type = 'create' } = props;
   const socket = useSocketConnection();
   const navigate = useNavigate();
+  const { roomKey } = useQueryParams();
   const dispatch = useAppDispatch();
-  const location = useLocation();
   const [roomName, setRoomName] = useState('');
   const [userName, setUserName] = useState('');
-  const roomKey = new URLSearchParams(location.search).get('roomKey') || '';
 
   const handleChange =
     (type: RoomType = 'roomName') =>
