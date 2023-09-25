@@ -6,7 +6,7 @@ import Button from '@mui/material/Button';
 
 type CardFlipType = {
   showCard: boolean;
-  count: number;
+  count: number | string;
 };
 
 export const CardFlip: FC<CardFlipType> = (props) => {

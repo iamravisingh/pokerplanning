@@ -3,3 +3,5 @@ export const GAME_OPTIONS = {
   REVEAL: 'Reveal Card',
   NEW_VOTING: 'Start New Voting',
 };
+
+export const EMOJI_SMILE = '😄'
