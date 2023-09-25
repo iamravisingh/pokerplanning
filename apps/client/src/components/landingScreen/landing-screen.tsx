@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
+import Hidden from '@mui/material/Hidden';
 import FibonacciImage from '../../assets/images/card.svg';
 import Typography from '@mui/material/Typography';
 import './style.scss';
@@ -23,9 +24,11 @@ export const LandingScreen = () => {
         </Button>
       </Box>
       <Box>
-        <motion.div animate={{ x: [0, 50, 0] }}>
-          <img alt="fibonacci_image" src={FibonacciImage} />
-        </motion.div>
+        <Hidden only={['xs', 'sm']}>
+          <motion.div animate={{ x: [0, 50, 0] }}>
+            <img loading="lazy" alt="fibonacci_image" src={FibonacciImage} />
+          </motion.div>
+        </Hidden>
       </Box>
     </Box>
   );

@@ -1,8 +1,12 @@
+$mobile-breakpoint: 480px;
+$layout-breakpoint: 780px;
+
 .cardContainer {
   display: grid;
   place-content: center;
   margin-top: 6rem;
   gap: 20px;
+  min-height: 310px;
   .card {
     display: flex;
     align-items: center;
@@ -37,10 +41,10 @@
     justify-content: center;
     width: 100%;
     gap: 30px;
-    .selectedCardCount {
+    .cardCount {
       display: flex;
       gap: 20px;
-      .selectedCardNumber {
+      .cardNumber {
         background: #fff;
         height: 7rem;
         cursor: pointer;
@@ -65,7 +69,11 @@
   justify-content: center;
   align-items: center;
   gap: 40px;
-  margin-top: 14rem;
+  margin-top: 12rem;
+  .cardCountWrapper{
+    display: flex;
+    gap: 20px;
+  }
   .cardHelper {
     display: flex;
     gap: 10px;
@@ -77,5 +85,12 @@
     font-style: normal;
     font-weight: 300;
     line-height: normal;
+  }
+  @media (max-width: $layout-breakpoint) {
+    .cardCountWrapper {
+      overflow-y: hidden;
+      overflow-x: auto;
+      width: 100%;
+    }
   }
 }

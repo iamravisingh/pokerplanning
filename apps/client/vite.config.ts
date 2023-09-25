@@ -19,13 +19,21 @@ export default defineConfig({
     port: 4300,
     host: 'localhost',
   },
- 
+
   plugins: [
     react(),
     viteTsConfigPaths({
       root: '../../',
     }),
   ],
+  resolve: {
+    alias: {
+      '@components': '/src/components',
+      '@store': '/src/store',
+      '@common': '/src/common',
+      '@services': '/src/services',
+    },
+  },
 
   // Uncomment this if you are using workers.
   // worker: {

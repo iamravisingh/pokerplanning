@@ -1,3 +1,5 @@
+$mobile-breakpoint: 480px;
+$layout-breakpoint: 780px;
 .roomEntryContainer {
   margin-top: 15px;
   width: 100%;
@@ -12,7 +14,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
-    width: 50%;
+    width: 45%;
     margin-bottom: 20px;
   }
   .roomEntryFormContainer {
@@ -20,7 +22,7 @@
     border: 1px solid rgba(164, 164, 164, 0.29);
     background: rgba(40, 42, 58, 0.5);
     display: flex;
-    width: 50%;
+    width: 45%;
     flex-direction: column;
 
     label {
@@ -74,6 +76,16 @@
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+    }
+  }
+  @media (max-width: $layout-breakpoint) {
+    h3 {
+      font-size: 20px;
+      text-align: center;
+      width: 100%;
+    }
+    .roomEntryFormContainer {
+      width: 100%;
     }
   }
 }

@@ -1,7 +1,10 @@
+$mobile-breakpoint: 480px;
+
 .landingScreenContainer {
   padding: 10px;
   margin: 20px;
   display: flex;
+  // container-type: inline-size;
   .landingContent {
     display: flex;
     flex-direction: column;
@@ -32,9 +35,20 @@
       border-radius: 20px;
       background: #282a3a;
       text-transform: none;
-      color: #C69749;
-      p{
+      color: #c69749;
+      p {
         font-size: 20px;
+      }
+    }
+    @media (max-width: $mobile-breakpoint) {
+      h1{
+        font-size: 30px;
+      }
+      .caption{
+        font-size: 21px;
+      }
+      button {
+        width: 100%;
       }
     }
   }

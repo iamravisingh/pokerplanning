@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useQueryParams } from '../../common/hooks';
 import { LayoutType } from './type';
 import { Header } from '../Header';
 import { Footer } from '../Footer';
@@ -9,15 +10,14 @@ import RoomService from '../../services/room';
 export const Layout: FC<LayoutType> = (props) => {
   const { children } = props;
   const [loading, setLoading] = useState(false);
-  const location = useLocation();
   const navigate = useNavigate();
-  const roomKey = new URLSearchParams(location.search).get('roomKey') || '';
+  const { roomKey } = useQueryParams();
 
   useEffect(() => {
     const fetchRoomKeyDetails = async () => {
       try {
         setLoading(true);
-        const collectRoomData = await RoomService.getRoomById(roomKey);
+        const collectRoomData = await RoomService.getRoomById(roomKey as string);
         if ('status' in collectRoomData) {
           if (collectRoomData.status !== 200) {
             //navigate to notfound room
