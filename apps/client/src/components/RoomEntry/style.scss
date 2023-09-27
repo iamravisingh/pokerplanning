@@ -27,7 +27,8 @@ $layout-breakpoint: 780px;
 
     label {
       color: #fff;
-      font-family: Istok Web;
+      font-family: Inter;
+      // font-family: Istok Web;
       font-size: 20px;
       font-style: normal;
       font-weight: 700;
@@ -38,6 +39,10 @@ $layout-breakpoint: 780px;
       display: flex;
       flex-direction: column;
       gap: 30px;
+      legend {
+        font-family: Inter;
+      }
+      
     }
     input {
       border-radius: 10px;

@@ -6,7 +6,7 @@ import { useSocketConnection, useQueryParams } from '../../common/hooks';
 import { setPlanningStart } from '../../store/reducers/planningSlice';
 import { ANIMATION_TEMPLATE } from '../../common/constant';
 import Box from '@mui/material/Box';
-import { CardDesk } from './components';
+import { CardPlayground } from './components';
 import './style.scss';
 
 export const RoomPlayground = () => {
@@ -26,7 +26,7 @@ export const RoomPlayground = () => {
   return (
     <motion.div {...ANIMATION_TEMPLATE.PAGE_LANDING}>
       <Box>
-        <CardDesk socket={socket} roomKey={roomKey as string} />
+        <CardPlayground socket={socket} roomKey={roomKey as string} />
       </Box>
     </motion.div>
   );

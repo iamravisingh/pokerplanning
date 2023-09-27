@@ -6,7 +6,7 @@ $layout-breakpoint: 780px;
   place-content: center;
   margin-top: 6rem;
   gap: 20px;
-  min-height: 310px;
+  min-height: 320px;
   .card {
     display: flex;
     align-items: center;
@@ -29,11 +29,33 @@ $layout-breakpoint: 780px;
         text-align: center;
         font-family: Inter;
         font-size: 1rem;
-        font-style: normal;
         font-weight: 600;
-        line-height: normal;
+      }
+      &:hover {
+        border: 3px solid #fff;
+        background: #737db2;
       }
     }
+    p {
+      color: #fff;
+      text-align: center;
+      font-family: Inter;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .startNewVoting {
+      &:hover {
+        border-radius: 10px;
+        border: 3px solid #50577a;
+        background: #1c1f2c;
+      }
+    }
+  }
+  .active {
+    border-radius: 36px;
+    border: 3px solid #98a8fa;
+    background: rgba(217, 217, 217, 0);
+    // filter: blur(2px);
   }
   .selectedCard {
     display: flex;
@@ -60,37 +82,6 @@ $layout-breakpoint: 780px;
           line-height: normal;
         }
       }
-    }
-  }
-}
-.cardCountContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-top: 12rem;
-  .cardCountWrapper{
-    display: flex;
-    gap: 20px;
-  }
-  .cardHelper {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    color: #fff;
-    text-align: center;
-    font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
-  }
-  @media (max-width: $layout-breakpoint) {
-    .cardCountWrapper {
-      overflow-y: hidden;
-      overflow-x: auto;
-      width: 100%;
     }
   }
 }

@@ -8,6 +8,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import TextField from '@mui/material/TextField';
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
+import Hidden from '@mui/material/Hidden';
 import Typography from '@mui/material/Typography';
 
 //mui icons
@@ -34,7 +35,7 @@ export const InvitePlayersButton = () => {
       handleClose();
       setNotify(true);
     } catch (error) {
-      console.error("Error copying text: ", error);
+      console.error('Error copying text: ', error);
     }
   };
 
@@ -53,7 +54,10 @@ export const InvitePlayersButton = () => {
         className="inviteButton"
       >
         <Box className="inviteButtonContent">
-          <GroupAddIcon /> <Typography>Invite Player</Typography>
+          <GroupAddIcon />{' '}
+          <Hidden only={['xs', 'sm']}>
+            <Typography>Invite Player</Typography>
+          </Hidden>
         </Box>
       </Button>
       <Dialog

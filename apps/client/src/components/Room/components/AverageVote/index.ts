@@ -1,0 +1,1 @@
+export { AverageVote } from "./average-vote";
