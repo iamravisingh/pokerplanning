@@ -1,0 +1,33 @@
+$layout-breakpoint: 780px;
+
+.cardCountContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 40px;
+    margin-top: 12rem;
+    .cardCountWrapper {
+      display: flex;
+      gap: 20px;
+    }
+    .cardHelper {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      color: #fff;
+      text-align: center;
+      font-family: Inter;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 300;
+      line-height: normal;
+    }
+    @media (max-width: $layout-breakpoint) {
+      .cardCountWrapper {
+        overflow-y: hidden;
+        overflow-x: auto;
+        width: 100%;
+      }
+    }
+  }

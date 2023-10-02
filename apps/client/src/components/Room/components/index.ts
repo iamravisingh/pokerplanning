@@ -1,1 +1,1 @@
-export { CardDesk } from "./CardDesk";
+export { CardPlayground } from "./CardPlayground";
