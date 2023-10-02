@@ -7,10 +7,11 @@ import Button from '@mui/material/Button';
 type CardFlipType = {
   showCard: boolean;
   count: number | string;
+  user: string;
 };
 
 export const CardFlip: FC<CardFlipType> = (props) => {
-  const { showCard, count } = props;
+  const { showCard, count, user } = props;
 
   return (
     <div style={{ perspective: '1000px' }}>
@@ -30,6 +31,7 @@ export const CardFlip: FC<CardFlipType> = (props) => {
             {showCard && <Typography>{count}</Typography>}
             {!showCard && <Typography>?</Typography>}
           </Button>
+          <Typography className="userName">{user}</Typography>
         </Box>
       </motion.div>
     </div>

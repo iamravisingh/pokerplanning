@@ -42,12 +42,14 @@ $layout-breakpoint: 780px;
       legend {
         font-family: Inter;
       }
-      
     }
     input {
       border-radius: 10px;
       border: 1.5px solid rgba(164, 164, 164, 0.29);
       background: #282a3a;
+      &::placeholder{
+        font-family: "Inter";
+      }
     }
   }
   .roomEntryButton {
@@ -57,11 +59,12 @@ $layout-breakpoint: 780px;
     background: #d9d9d9;
     color: #000;
     text-align: center;
-    font-family: Istok Web;
-    font-size: 18px;
+    font-family: Inter;
+    font-size: 20px;
     font-style: normal;
     font-weight: 700;
     line-height: normal;
+
     &:hover {
       background: #4355f5;
       color: #ffff;

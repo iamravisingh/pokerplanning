@@ -26,14 +26,16 @@ export const EmojiPicker: FC<EmojiPickerType> = (props) => {
   };
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-      style={{ ...pickerWrapperStyles }}
-    >
+    <div>
       {show && (
-        <div>
+        <motion.div
+          layout
+          initial={{ opacity: 0 }}
+          animate={{ x: -20, opacity: 1}}
+          transition={{ ease: "easeOut", duration: 0.3 }}
+          exit={{ opacity: 0 }}
+          style={{ ...pickerWrapperStyles }}
+        >
           <Picker
             data={data}
             onEmojiSelect={handleSelect}
@@ -41,9 +43,9 @@ export const EmojiPicker: FC<EmojiPickerType> = (props) => {
             onClickOutside={handleClickOutside}
             {...otherProps}
           />
-        </div>
+        </motion.div>
       )}
-    </motion.div>
+    </div>
   );
 };
 

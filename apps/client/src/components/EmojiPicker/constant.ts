@@ -1,5 +1,5 @@
 export const defaultWrapperStyles = {
   position: 'absolute',
-  right: '85px',
-  bottom: '170px',
+  right: '75px',
+  bottom: '150px',
 };

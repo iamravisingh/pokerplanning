@@ -1,4 +1,4 @@
-import { useState, FC, MouseEvent } from 'react';
+import { useState, FC, MouseEvent, useMemo, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -12,6 +12,8 @@ import { CardDeskProps } from './type';
 import './style.scss';
 
 export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
+  const { socket, roomKey, socketConnected, currentUser } = props;
+  const [ usersList, setUsersList ] = useState<string[]>([])
   const [selectedCount, setSelectedCount] = useState<number | string | null>(
     null
   );
@@ -19,7 +21,20 @@ export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
     GAME_OPTIONS.PICK
   );
 
+  useEffect(() => {
+    if (socketConnected) {
+      socket?.on('joined', (data) => {
+        if("users" in data.room){
+          setUsersList(data.room.users);
+          
+        }
+        console.log('socket joined users list >>>>>>>>', data);
+      });
+    }
+  }, [socketConnected]);
+
   const handleCardClick = (value: number | string) => () => {
+    socket?.emit('cardSelection', roomKey, 'xyz', value);
     console.log('inside handle click >>>>>>>>', value);
     if (currentCardType === GAME_OPTIONS.PICK) {
       setCurrentCardType(GAME_OPTIONS.REVEAL);
@@ -40,6 +55,7 @@ export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
       updateCardType = GAME_OPTIONS.NEW_VOTING;
     } else if (text === GAME_OPTIONS.NEW_VOTING) {
       setSelectedCount(null);
+      setUsersList([]);
     }
     setCurrentCardType(updateCardType);
   };
@@ -62,6 +78,8 @@ export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
   };
 
   const revelCardNow = currentCardType === GAME_OPTIONS.NEW_VOTING;
+  const filterUsersList = usersList.filter(Boolean)
+  console.log('card playground >>>>>>>>>>', usersList);
   return (
     <Box>
       <Box className="cardContainer">
@@ -71,9 +89,14 @@ export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
           </Card>
         </motion.div>
         <Box className="selectedCard">
-          {selectedCount !== null && (
+          {
+            filterUsersList.map((user) => {
+              return <CardFlip showCard={revelCardNow} count={0} user={user}/>
+            })
+          }
+          {/* {selectedCount !== null && (
             <CardFlip showCard={revelCardNow} count={selectedCount} />
-          )}
+          )} */}
         </Box>
       </Box>
       {currentCardType === GAME_OPTIONS.NEW_VOTING ? (
