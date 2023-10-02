@@ -25,11 +25,13 @@ export const CardFlip: FC<CardFlipType> = (props) => {
           <Button
             className="cardNumber"
             style={{
-              background: showCard ? '#fff' : '#c69749',
+              background: showCard ? '#fff' : '#282A3A',
+              borderRadius: '10px',
+              border: '3px solid #50577a',
             }}
           >
             {showCard && <Typography>{count}</Typography>}
-            {!showCard && <Typography>?</Typography>}
+            {!showCard && <Typography style={{ color: '#fff' }}>?</Typography>}
           </Button>
           <Typography className="userName">{user}</Typography>
         </Box>
