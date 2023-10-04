@@ -27,12 +27,16 @@ $mobile-breakpoint: 480px;
       line-height: normal;
       letter-spacing: -1.2px;
     }
+    .startPlanning{
+      font-weight: 700;
+      font-family: Inter;
+    }
 
     button {
       margin-top: 20px;
       padding: 20px;
       width: 35%;
-      border-radius: 20px;
+      border-radius: 10px;
       background: #282a3a;
       text-transform: none;
       color: #c69749;
