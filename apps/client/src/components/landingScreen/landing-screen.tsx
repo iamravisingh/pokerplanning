@@ -25,7 +25,7 @@ export const LandingScreen = () => {
           <Typography className="caption">
             Create better estimates, healthier sprints, and happier teams.
           </Typography>
-          <Button variant="contained" onClick={handleCreateRoom}>
+          <Button variant="contained" className="startPlanning" onClick={handleCreateRoom}>
             <Typography>Start Planning Now!</Typography>
           </Button>
         </Box>
