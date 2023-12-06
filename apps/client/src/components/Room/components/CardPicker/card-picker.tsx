@@ -2,10 +2,16 @@ import { FC } from 'react';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button, { ButtonProps } from '@mui/material/Button';
-import { CardPickerType } from './type';
 import './style.scss';
 
-export const CardPicker: FC<CardPickerType<ButtonProps>> = (props) => {
+type CardPickerType = {
+  handleClick?: () => void;
+  value: string | number;
+  buttonProps?: ButtonProps;
+  classes?: string;
+};
+
+export const CardPicker: FC<CardPickerType> = (props) => {
   const { handleClick, buttonProps, value, classes } = props;
   const onClick = () => {
     handleClick?.();

@@ -8,14 +8,15 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Paper from '@mui/material/Paper';
 import RoomService from '../../services/room';
-import { useQueryParams } from '../../common/hooks';
 import { ANIMATION_TEMPLATE } from '../../common/constant';
 import { RoomType, RoomEntryType } from './type';
 import { RoomsType } from './constant';
 import './style.scss';
+import { useSocketConnection, useQueryParams } from '../../common/hooks';
 
 export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   const { type = 'create' } = props;
+  const socket = useSocketConnection();
   const navigate = useNavigate();
   const { roomKey } = useQueryParams();
   const dispatch = useAppDispatch();
@@ -28,11 +29,13 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
       const {
         target: { value },
       } = event;
-      if (type === 'roomName') {
-        setRoomName(value);
-      }
-      if (type === 'userName') {
-        setUserName(value);
+      if (value) {
+        if (type === 'roomName') {
+          setRoomName(value);
+        }
+        if (type === 'userName') {
+          setUserName(value);
+        }
       }
     };
 
@@ -57,15 +60,20 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
   };
 
   const handleRoomEntry = () => {
+    //TODO: we should have a one instance of socket which
+    socket.connect();
     if (type === RoomsType.CREATE) {
       handleCreateRoom();
     } else if (type === RoomsType.JOIN) {
-      navigate(`/room/?roomKey=${roomKey}&userName=${userName}`);
+      if (socket) {
+        socket?.emit('join', roomKey, userName);
+        navigate(`/room/?roomKey=${roomKey}`);
+      }
     }
   };
 
   const showRoomName = type === RoomsType.CREATE;
-  console.log('type in room entry >>>>>>>', type, userName);
+  console.log('type in room entry >>>>>>>', type);
   return (
     <motion.div {...ANIMATION_TEMPLATE.PAGE_LANDING}>
       <Box className="roomEntryContainer">
@@ -74,29 +82,28 @@ export const RoomEntry: FC<RoomEntryType> = (props): JSX.Element => {
           <Box className="roomFormFields" mt={3}>
             {showRoomName && (
               <TextField
-                className="inputField"
+                autoFocus
                 margin="dense"
-                variant="outlined"
-                fullWidth
-                required
-                id="room-name"
+                id="name"
                 label="Room Name"
+                fullWidth
+                variant="outlined"
                 placeholder="Give your room a name"
                 value={roomName}
                 onChange={handleChange('roomName')}
+                required
               />
             )}
             <TextField
-              autoFocus={!showRoomName}
               margin="dense"
-              variant="outlined"
-              fullWidth
-              required
-              id="user-name"
+              id="name"
               label="Your Name"
+              fullWidth
+              variant="outlined"
               placeholder="Type your name"
               value={userName}
               onChange={handleChange('userName')}
+              required
             />
             <Button
               variant="contained"

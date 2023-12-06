@@ -14,33 +14,22 @@ export const LandingScreen = () => {
   };
   return (
     <Box className="landingScreenContainer">
-      <motion.div
-        initial={{ x: -100 }}
-        animate={{ x: 0}}
-        exit={{ x: [100, 0, 0] }}
-        transition={{ ease: 'easeOut', duration: 1}}
-      >
-        <Box className="landingContent">
-          <h1 className="heading">Plan Better</h1>
-          <Typography className="caption">
-            Create better estimates, healthier sprints, and happier teams.
-          </Typography>
-          <Button variant="contained" onClick={handleCreateRoom}>
-            <Typography>Start Planning Now!</Typography>
-          </Button>
-        </Box>
-      </motion.div>
-      <motion.div
-        initial={{ x: 100}}
-        animate={{ x: 0}}
-        transition={{ ease: 'easeOut', duration: 1 }}
-      >
-        <Box>
-          <Hidden only={['xs', 'sm']}>
+      <Box className="landingContent">
+        <h1 className="heading">Plan Better</h1>
+        <Typography className="caption">
+          Create better estimates, healthier sprints, and happier teams.
+        </Typography>
+        <Button variant="contained" onClick={handleCreateRoom}>
+          <Typography>Start Planning Now!</Typography>
+        </Button>
+      </Box>
+      <Box>
+        <Hidden only={['xs', 'sm']}>
+          <motion.div animate={{ x: [0, 50, 0] }}>
             <img loading="lazy" alt="fibonacci_image" src={FibonacciImage} />
-          </Hidden>
-        </Box>
-      </motion.div>
+          </motion.div>
+        </Hidden>
+      </Box>
     </Box>
   );
 };

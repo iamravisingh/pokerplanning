@@ -1,14 +1,11 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@emoji-mart/data': ^1.1.2
-  '@emoji-mart/react': ^1.1.1
   '@emotion/react': ^11.11.1
   '@emotion/styled': ^11.11.0
   '@fontsource/roboto': ^5.0.5
   '@mui/icons-material': ^5.14.0
   '@mui/material': ^5.14.0
-  emoji-mart: ^5.5.2
   framer-motion: 6.5.1
   react: ^17.0.2
   react-dom: ^17.0.2
@@ -16,14 +13,11 @@ specifiers:
   socket.io-client: ^4.7.1
 
 dependencies:
-  '@emoji-mart/data': 1.1.2
-  '@emoji-mart/react': 1.1.1_xzajm5omly4w3xxs5aqkcy6vxy
   '@emotion/react': 11.11.1_react@17.0.2
   '@emotion/styled': 11.11.0_2i2e5cpzprev2hjwclqpph3q6e
   '@fontsource/roboto': 5.0.5
   '@mui/icons-material': 5.14.0_fvdwv4ihlvjucqjzaktcsmpgpe
   '@mui/material': 5.14.0_tcdmvkddfs54cu7bpa4n2kbgdm
-  emoji-mart: 5.5.2
   framer-motion: 6.5.1_sfoxds7t5ydpegc3knd667wn6m
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -81,20 +75,6 @@ packages:
       '@babel/helper-string-parser': 7.22.5
       '@babel/helper-validator-identifier': 7.22.5
       to-fast-properties: 2.0.0
-    dev: false
-
-  /@emoji-mart/data/1.1.2:
-    resolution: {integrity: sha512-1HP8BxD2azjqWJvxIaWAMyTySeZY0Osr83ukYjltPVkNXeJvTz7yDrPLBtnrD5uqJ3tg4CcLuuBW09wahqL/fg==}
-    dev: false
-
-  /@emoji-mart/react/1.1.1_xzajm5omly4w3xxs5aqkcy6vxy:
-    resolution: {integrity: sha512-NMlFNeWgv1//uPsvLxvGQoIerPuVdXwK/EUek8OOkJ6wVOWPUizRBJU0hDqWZCOROVpfBgCemaC3m6jDOXi03g==}
-    peerDependencies:
-      emoji-mart: ^5.2
-      react: ^16.8 || ^17 || ^18
-    dependencies:
-      emoji-mart: 5.5.2
-      react: 17.0.2
     dev: false
 
   /@emotion/babel-plugin/11.11.0:
@@ -569,10 +549,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.6
       csstype: 3.1.2
-    dev: false
-
-  /emoji-mart/5.5.2:
-    resolution: {integrity: sha512-Sqc/nso4cjxhOwWJsp9xkVm8OF5c+mJLZJFoFfzRuKO+yWiN7K8c96xmtughYb0d/fZ8UC6cLIQ/p4BR6Pv3/A==}
     dev: false
 
   /engine.io-client/6.5.1:
