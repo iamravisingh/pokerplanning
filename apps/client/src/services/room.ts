@@ -23,7 +23,8 @@ export type GetRoomResponseData = {
 
 export type GetRoomByIdResponseData = {
   status: number;
-  roomsDetails: RoomDetails;
+  roomDetails: RoomDetails;
+  users: Array<string>
 };
 
 class RoomService {

@@ -1,4 +1,3 @@
-
 import { NavLink } from 'react-router-dom';
 import { useAppSelector } from '../../store/hooks';
 import { isPlanningStarted } from '../../store/reducers/planningSlice';
@@ -8,12 +7,13 @@ import { InvitePlayersButton } from './components/InviteDialog';
 import './style.scss';
 
 export const Header = () => {
-  const checkPlanningStarted = useAppSelector(isPlanningStarted);  
+  const checkPlanningStarted = useAppSelector(isPlanningStarted);
   return (
     <Box className="headerContainer">
       <Box width={250} height={95} className="logoContainer">
         <NavLink to="/">
           <img
+            loading="lazy"
             width="100%"
             height="100%"
             alt="pokerplanning"

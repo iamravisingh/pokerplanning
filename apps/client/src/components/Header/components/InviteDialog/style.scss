@@ -15,6 +15,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      p {
+        text-align: center;
+        font-family: Inter;
+        font-size: 1rem;
+        font-weight: 600;
+      }
     }
   }
   // .invitePlayerDialog {
@@ -40,6 +46,7 @@
           background: #C69749;
         }
       }
+
     }
   // }
 }

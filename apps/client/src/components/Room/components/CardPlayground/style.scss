@@ -1,8 +1,12 @@
+$mobile-breakpoint: 480px;
+$layout-breakpoint: 780px;
+
 .cardContainer {
   display: grid;
   place-content: center;
   margin-top: 6rem;
   gap: 20px;
+  min-height: 320px;
   .card {
     display: flex;
     align-items: center;
@@ -25,11 +29,33 @@
         text-align: center;
         font-family: Inter;
         font-size: 1rem;
-        font-style: normal;
         font-weight: 600;
-        line-height: normal;
+      }
+      &:hover {
+        border: 3px solid #fff;
+        background: #737db2;
       }
     }
+    p {
+      color: #fff;
+      text-align: center;
+      font-family: Inter;
+      font-size: 1rem;
+      font-weight: 600;
+    }
+    .startNewVoting {
+      &:hover {
+        border-radius: 10px;
+        border: 3px solid #50577a;
+        background: #1c1f2c;
+      }
+    }
+  }
+  .active {
+    border-radius: 36px;
+    border: 3px solid #98a8fa;
+    background: rgba(217, 217, 217, 0);
+    // filter: blur(2px);
   }
   .selectedCard {
     display: flex;
@@ -37,10 +63,11 @@
     justify-content: center;
     width: 100%;
     gap: 30px;
-    .selectedCardCount {
+    .cardCount {
       display: flex;
-      gap: 20px;
-      .selectedCardNumber {
+      gap: 10px;
+      flex-direction: column;
+      .cardNumber {
         background: #fff;
         height: 7rem;
         cursor: pointer;
@@ -58,24 +85,11 @@
       }
     }
   }
-}
-.cardCountContainer {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 40px;
-  margin-top: 14rem;
-  .cardHelper {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    color: #fff;
+  .userName{
+    color: #d9d9d9;
     text-align: center;
-    font-family: Inter;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 300;
-    line-height: normal;
+    // font-family: Inter;
+    font-size: 13px;
+    // font-weight: 600;
   }
 }
