@@ -10,7 +10,12 @@
     "type": "git",
     "url": "ssh://git@github.com:iamravisingh/pokerplanning.git"
   },
-  "scripts": {},
+  "scripts": {
+    "bootstrap": "pnpm i --frozen-lockfile",
+    "setup": "pnpm i",
+    "app-server": "nx run server:serve",
+    "app-client": "nx run client:serve"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
