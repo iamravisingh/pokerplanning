@@ -2,7 +2,20 @@
   "name": "@pokerplanning/source",
   "version": "0.0.0",
   "license": "MIT",
-  "scripts": {},
+  "author": {
+    "name": "Ravi Singh",
+    "url": "https://github.com/iamravisingh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:iamravisingh/pokerplanning.git"
+  },
+  "scripts": {
+    "bootstrap": "pnpm i --frozen-lockfile",
+    "setup": "pnpm i",
+    "app-server": "nx run server:serve",
+    "app-client": "nx run client:serve"
+  },
   "private": true,
   "dependencies": {
     "@reduxjs/toolkit": "^1.9.5",
