@@ -1,1 +1,1 @@
-export { NotFound } from "./not-found"
+export { NotFoundScreen } from "./not-found"

@@ -90,8 +90,8 @@ export const CardPlayground: FC<CardDeskProps> = (props): JSX.Element => {
         </motion.div>
         <Box className="selectedCard">
           {
-            filterUsersList.map((user) => {
-              return <CardFlip showCard={revelCardNow} count={0} user={user}/>
+            filterUsersList.map((user, idx) => {
+              return <CardFlip key={`${user}-${idx}`} showCard={revelCardNow} count={0} user={user}/>
             })
           }
           {/* {selectedCount !== null && (
